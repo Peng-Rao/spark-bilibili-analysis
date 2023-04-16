@@ -41,14 +41,14 @@ docker run -it --rm --name spark -p 8080:8080 -p 7077:7077 -p 6066:6066 -p 4040:
 <dependency>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-sql_2.12</artifactId>
-    <version>${spark.version}</version>
+    <version>{spark.version}</version>
 </dependency>
 <!--Spark Core-->
 <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
 <dependency>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-core_2.12</artifactId>
-    <version>${spark.version}</version>
+    <version>{spark.version}</version>
 ```
 4. run the scala script  
 after run the scala project, you can see the result in the mysql database
