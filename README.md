@@ -65,3 +65,27 @@ npm run serve
 7. open the browser and visit the url: http://localhost:8080
 
 ### cluster mode
+if you want to run the project in cluster mode, you need to change the spark container based on hadoop
+```agsl
+docker pull s1mplecc/spark-hadoop:3
+git clone https://github.com/s1mplecc/spark-hadoop-docker.git
+cd spark-hadoop-docker
+// start the container
+docker-compose up -d
+// enter the container
+docker exec -it spark-hadoop-master bash
+./start-hadoop.sh
+// exit the container
+exit
+```
+#### Web UI
+|           Web UI            |          默认网址          |                         备注                         |
+|:---------------------------:|:----------------------:|:--------------------------------------------------:|
+|  \* **Spark Application**   | http://localhost:4040  | 由 SparkContext 启动，显示以本地或 Standalone 模式运行的 Spark 应用 |
+|   Spark Standalone Master   | http://localhost:8080  |        显示集群状态，以及以 Standalone 模式提交的 Spark 应用        |
+|    \* **HDFS NameNode**     | http://localhost:9870  |                   可浏览 HDFS 文件系统                    |
+| \* **YARN ResourceManager** | http://localhost:8088  |               显示提交到 YARN 上的 Spark 应用               |
+|      YARN NodeManager       | http://localhost:8042  |                  显示工作节点配置信息和运行时日志                  |
+|    MapReduce Job History    | http://localhost:19888 |                   MapReduce 历史任务                   |
+
+then you can run the project in cluster mode
