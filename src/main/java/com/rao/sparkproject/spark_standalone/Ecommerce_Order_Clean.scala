@@ -1,5 +1,6 @@
+package com.rao.sparkproject.spark_standalone
+
 import org.apache.spark.sql.{SaveMode, SparkSession}
-import org.apache.spark.{SparkConf, SparkContext}
 
 object Ecommerce_Order_Clean {
   def main(args: Array[String]): Unit = {
