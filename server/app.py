@@ -40,3 +40,24 @@ def get_ProvinceOrder_data():
     data = cur.fetchall()
     cur.close()
     return jsonify(data)
+
+
+@app.route('/StatusContrast', methods=['GET'])
+def get_StatusContrast_data():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT order_status, count FROM tb_status_contrast")
+    data = cur.fetchall()
+    cur.close()
+    return jsonify(data)
+
+@app.route('/TimeOrder', methods=['GET'])
+def get_TimeOrder_data():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT time_point, count FROM tb_time_order")
+    data = cur.fetchall()
+    cur.close()
+    return jsonify(data)
+
+
+if __name__ == '__main__':
+    app.run()

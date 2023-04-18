@@ -1,5 +1,5 @@
 <template>
-    <div id="OrderPriceRange" style="width:100%;height:300px;"></div>
+    <div id="OrderPriceRange" style="width:100%;height:500px;"></div>
 </template>
 <script>
 import axios from 'axios';
@@ -27,23 +27,28 @@ export default {
             const chartDom = document.getElementById('OrderPriceRange');
             const chart = echarts.init(chartDom);
             const option = {
-                title: {
-                    text: 'Price Distribution'
-                },
+                backgroundColor: '#04243E',
                 tooltip: {
                     trigger: 'item',
-                    formatter: '{b} : {c} ({d}%)'
                 },
                 legend: {
                     orient: 'horizontal',
-                    bottom: 10,
-                    data: this.data.map(item => item.price_range)
+                    bottom:"15%",
+                    left: "20%",
+                    textStyle: {
+                        color:"#fff"
+                    },
+                },
+                toolbox: {
+                    show: false
                 },
                 series: [
                     {
+                        name: '',
                         type: 'pie',
-                        radius: '50%',
-                        center: ['50%', '50%'],
+                        clockWise: false,
+                        radius: [100, 200],
+                        hoverAnimation: false,
                         data: this.data.map(item => ({
                             name: item.price_range,
                             value: item.count

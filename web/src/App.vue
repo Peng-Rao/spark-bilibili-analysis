@@ -1,28 +1,25 @@
 <template>
     <div class="app">
-        <div>
-            <order-chart></order-chart>
-        </div>
-        <div>
-            <succeed-goods-top></succeed-goods-top>
-        </div>
-        <div>
-            <province-order></province-order>
-        </div>
+        <order-chart></order-chart>
+        <success-goods-top></success-goods-top>
+<!--        <ProvinceOrdersHeatmap></ProvinceOrdersHeatmap>-->
+        <time-order></time-order>
     </div>
 </template>
 
 <script>
 import OrderChart from './components/OrderPriceRange.vue'
-import SucceedGoodsTop from './components/SucceedGoodsTop.vue'
-import ProvinceOrder from "@/components/ProvinceOrder.vue";
+import SuccessGoodsTop from './components/SucceedGoodsTop.vue'
+// import ProvinceOrdersHeatmap from "@/components/ProvinceOrdersHeatmap.vue";
+import TimeOrder from "@/components/TimeOrder.vue";
 
 export default {
     name: 'App',
     components: {
+        // ProvinceOrdersHeatmap,
         OrderChart,
-        SucceedGoodsTop,
-        ProvinceOrder
+        SuccessGoodsTop,
+        TimeOrder
     }
 }
 </script>
