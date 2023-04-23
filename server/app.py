@@ -50,6 +50,7 @@ def get_StatusContrast_data():
     cur.close()
     return jsonify(data)
 
+
 @app.route('/TimeOrder', methods=['GET'])
 def get_TimeOrder_data():
     cur = mysql.connection.cursor()
