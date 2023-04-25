@@ -60,7 +60,8 @@ python app.py
 6. start the web client
 ```agsl
 cd web
-npm run serve
+npm install
+npm run dev
 ```
 7. open the browser and visit the url: http://localhost:8080
 

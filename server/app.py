@@ -1,7 +1,7 @@
+import happybase
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # 允许所有域名跨域
@@ -34,13 +34,13 @@ def get_SucceedGoodsTop_data():
     return jsonify(data)
 
 
-@app.route('/ProvinceOrder', methods=['GET'])
-def get_ProvinceOrder_data():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT province_name, count FROM tb_province_order")
-    data = cur.fetchall()
-    cur.close()
-    return jsonify(data)
+# @app.route('/ProvinceOrder', methods=['GET'])
+# def get_ProvinceOrder_data():
+#     cur = mysql.connection.cursor()
+#     cur.execute("SELECT province_name, count FROM tb_province_order")
+#     data = cur.fetchall()
+#     cur.close()
+#     return jsonify(data)
 
 
 @app.route('/StatusContrast', methods=['GET'])
@@ -68,6 +68,27 @@ def get_OrderDetail_data():
     data = cur.fetchall()
     cur.close()
     return jsonify(data)
+
+
+@app.route('/ProvinceOrder', methods=['GET'])
+def get_test_data():
+    conn = happybase.Connection('192.168.1.108')
+    table = conn.table('tb_province_order')
+    # 获取所有数据
+    data = table.scan()
+    # 遍历数据
+    result = []
+    for key, value in data:
+        value1 = value[b'city:province_name']
+        value1_str = value1.decode('utf-8')
+        value2 = value[b'city:count']
+        value2_str = value2.decode('utf-8')
+        result.append({'province_name': value1_str, 'count': value2_str})
+    # 将result转换为jsonify格式
+    result = jsonify(result)
+    # 关闭连接
+    conn.close()
+    return result
 
 
 if __name__ == '__main__':
