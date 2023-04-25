@@ -2,8 +2,9 @@ from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 
+
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # 允许所有域名跨域
 
 # MySQL配置
 app.config['MYSQL_HOST'] = 'localhost'
@@ -55,6 +56,15 @@ def get_StatusContrast_data():
 def get_TimeOrder_data():
     cur = mysql.connection.cursor()
     cur.execute("SELECT time_point, count FROM tb_time_order")
+    data = cur.fetchall()
+    cur.close()
+    return jsonify(data)
+
+
+@app.route('/OrderDetail', methods=['GET'])
+def get_OrderDetail_data():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT order_id, sku_name, order_price, sku_num, create_time FROM order_detail")
     data = cur.fetchall()
     cur.close()
     return jsonify(data)

@@ -1,27 +1,114 @@
 <template>
-    <div class="app">
-        <order-chart></order-chart>
-        <success-goods-top></success-goods-top>
-<!--        <ProvinceOrdersHeatmap></ProvinceOrdersHeatmap>-->
-        <time-order></time-order>
+    <div class="layout">
+        <el-container class="container">
+            <el-aside class="aside">
+                <div class="head">
+                    <div>
+                        <img src="https://th.bing.com/th/id/OIP.s5uO4WYlOauM47ScG6atvAHaEC?pid=ImgDet&rs=1" alt="logo">
+                        <span>spark analysis</span>
+                    </div>
+                </div>
+                <div class="line" />
+                <el-menu
+                    background-color="#222832"
+                    text-color="#fff"
+                    :router="true"
+                >
+                    <el-sub-menu index="1">
+                        <template #title>
+                            <span>Dashboard</span>
+                        </template>
+                        <el-menu-item index="/"><el-icon><el-icon-data-board /></el-icon>首页</el-menu-item>
+                        <el-menu-item index="/price-range"><el-icon><el-icon-pie-chart /></el-icon>价格分布区间</el-menu-item>
+                        <el-menu-item index="/hot-product"><el-icon><el-icon-shopping-cart-full/></el-icon>热门商品统计</el-menu-item>
+                        <el-menu-item index="/province-order"><el-icon><el-icon-location /></el-icon>订单省份分布</el-menu-item>
+                        <el-menu-item index="/order-detail"><el-icon><el-icon-document-checked/></el-icon>订单明细</el-menu-item>
+
+                    </el-sub-menu>
+<!--                    <el-sub-menu index="2">-->
+<!--                        <template #title>-->
+<!--                            <span>集群管理</span>-->
+<!--                        </template>-->
+<!--                        <el-menu-item index="/name-node"> NameNode 管理</el-menu-item>-->
+<!--                    </el-sub-menu>-->
+                </el-menu>
+            </el-aside>
+            <el-container class="content">
+                <Header />
+                <div class="main">
+                    <router-view />
+                </div>
+                <Footer />
+            </el-container>
+        </el-container>
     </div>
 </template>
 
 <script>
-import OrderChart from './components/OrderPriceRange.vue'
-import SuccessGoodsTop from './components/SucceedGoodsTop.vue'
-// import ProvinceOrdersHeatmap from "@/components/ProvinceOrdersHeatmap.vue";
-import TimeOrder from "@/components/TimeOrder.vue";
-
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 export default {
     name: 'App',
     components: {
-        // ProvinceOrdersHeatmap,
-        OrderChart,
-        SuccessGoodsTop,
-        TimeOrder
-    }
+        Header,
+        Footer
+    },
 }
 </script>
+
+<style scoped>
+.layout {
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+.container {
+    height: 100vh;
+}
+.aside {
+    width: 200px!important;
+    background-color: #222832;
+}
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+.head > div {
+    display: flex;
+    align-items: center;
+}
+
+.head img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+.head span {
+    font-size: 20px;
+    color: #ffffff;
+}
+.line {
+    border-top: 1px solid hsla(0,0%,100%,.05);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    overflow: hidden;
+}
+.main {
+    height: calc(100vh - 100px);
+    overflow: auto;
+    padding: 10px;
+}
+</style>
+
 <style>
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 </style>
