@@ -27,8 +27,8 @@ import { onMounted, onUnmounted, ref, reactive} from 'vue';
 import ChinaMapJson from '@/assets/geo/china.json';
 import axios from "axios";
 let myChart = null;
-let maxValue = ref(null);
-let minValue = ref(null);
+let maxValue = ref(0);
+let minValue = ref(0);
 
 onMounted(() => {
     if (window.echarts) {
@@ -94,8 +94,8 @@ onMounted(() => {
             option.series = [series];
             myChart.setOption(option);
             const counts = data.map(item => item.count);
-            minValue = Math.min(...counts);
-            maxValue = Math.max(...counts);
+            minValue.value = Math.min(...counts);
+            maxValue.value = Math.max(...counts);
         })
         // 使用刚指定的配置项和数据显示图表。
         setInterval(() => {
@@ -121,9 +121,13 @@ onMounted(() => {
                         }
                     })
                 }
-                option.series = [series]
+                option.series = [series];
+                myChart.setOption(option);
+                const counts = data.map(item => item.count);
+                console.log(counts)
+                minValue.value = Math.min(...counts);
+                maxValue.value = Math.max(...counts);
             })
-            myChart.setOption(option)
         }, 10000);
     }
 })
